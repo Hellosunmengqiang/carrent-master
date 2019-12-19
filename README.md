@@ -4,7 +4,7 @@ SpringBoot汽车租赁系统-Car Rental Management On Spring Boot
 base on spring boot, this is a system for car rental demand.
 it has these features:
 * spring boot + mybatis
-* mongodb
+* mysql
 * echarts data view
 * alipay(支付宝支付) sandbox
 * dropzone pictures upload(多图片上传)
