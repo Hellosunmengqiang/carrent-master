@@ -1,8 +1,8 @@
 # carrent
-SpringBoot汽车租赁系统-Car Rental Management On Spring Boot
+SpringBoot共享汽车系统-Car Rental Management On Spring Boot
 
-base on spring boot, this is a system for car rental demand.
-it has these features:
+* 涉及通信方面的功能
+* 前端:js+jq+vue+模板
 * spring boot + mybatis
 * mysql
 * echarts data view
