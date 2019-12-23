@@ -162,7 +162,7 @@ public class CarController {
                 carService.addCar(car);
                 int carId = carService.findCarId(car);
                 String pictureName = "" + carId + ".JPG";
-                String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/images/car/";
+                String filePath = "F:/idea/carrent-master/src/main/webapp/images/car/";
                 File dest = new File(filePath + pictureName);
                 carPicture.transferTo(dest);
                 car.setFiles("true");
@@ -231,7 +231,7 @@ public class CarController {
             try {
                 String lisenceNmae = "lisence" + cdId + ".docx";
                 String fsFileName = "fsFile" + cdId + ".docx";
-                String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/files/";
+                String filePath = "F:/idea/carrent-master/src/main/webapp/images/car/";//   /Users/pu/Desktop/carrent/src/main/webapp/files/
                 File dest = new File(filePath + lisenceNmae);
                 lisence.transferTo(dest);
                 carDetail.setLisence(1);
@@ -269,7 +269,7 @@ public class CarController {
                     else times += 1;
                     session.setAttribute("times", times);
                     String fileName = "" + times + ".jpg";
-                    String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/images/carDetail/"+cdId+"/";
+                    String filePath = "F:/idea/carrent-master/src/main/webapp/images/carDetail/"+cdId+"/";
                     File path = new File(filePath);
                     if (!path.exists()) path.mkdirs();
                     File dest = new File(filePath + fileName);
@@ -381,7 +381,7 @@ public class CarController {
                 carBrand.setBrandname(brandName);
                 carBrandService.addCarBrand(carBrand);
                 String fileName = "" + carBrandService.findBrandIdByName(brandName) + ".JPG";
-                String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/images/logo/";
+                String filePath = "F:/idea/carrent-master/src/main/webapp/images/logo/";
                 File dest = new File(filePath + fileName);
                 file.transferTo(dest);
                 return "redirect:/backManage/showCarConditions";
