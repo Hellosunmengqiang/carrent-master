@@ -199,7 +199,7 @@
                                                         label:{
                                                             show:true,//是否显示标签
                                                             textStyle: {
-                                                                color: "rgb(249, 249, 249)"
+                                                                color: "rgb(189, 724, 92)"
                                                             }
                                                         }
                                                     },

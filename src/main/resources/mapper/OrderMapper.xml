@@ -316,7 +316,13 @@
   </select>
 
   <select id="findOrderDataByProvince" resultType="com.pu.carrent.entity.OrderData">
-        select count(orderId) as orderNum, pName from t_order left join t_cardetail tc on t_order.carId = tc.cdId left join t_car t on tc.carId = t.carId left join t_location tl on t.lId = tl.lId left join t_city tc2 on tl.cId = tc2.cId left join t_province tp on tc2.pId = tp.pId
+        select count(orderId) as orderNum, pName
+        from t_order
+        left join t_cardetail tc on t_order.carId = tc.cdId
+        left join t_car t on tc.carId = t.carId
+        left join t_location tl on t.lId = tl.lId
+        left join t_city tc2 on tl.cId = tc2.cId
+        left join t_province tp on tc2.pId = tp.pId
         group by tp.pId
   </select>
 </mapper>
