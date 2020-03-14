@@ -16,6 +16,7 @@ public class CarrentApplication extends SpringBootServletInitializer {
 
 
     //2020.03.14
+
     @Override//为了打包springboot项目
     protected SpringApplicationBuilder configure(
             SpringApplicationBuilder builder) {
