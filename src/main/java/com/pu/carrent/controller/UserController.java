@@ -13,6 +13,7 @@ import com.pu.carrent.entity.User;
 import com.pu.carrent.entity.UserType;
 import com.pu.carrent.service.UserService;
 import com.pu.carrent.service.UserTypeService;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 @Controller
@@ -66,31 +68,61 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    public String register(String userName, String password, String phone, String code, Model model, HttpSession session) {
-        String sCode = (String) session.getAttribute("code");
-        if ("".compareTo(userName) == 0 || "".compareTo(password) == 0 || "".compareTo(phone) == 0) {
+    public String register(String userName, String password, String email, String code, Model model, HttpSession session) {
+        String sCode = (String) session.getAttribute("code");//验证码
+        //System.out.println("******sCode:"+sCode);
+        if ("".compareTo(userName) == 0 || "".compareTo(password) == 0 || "".compareTo(email) == 0) {
             model.addAttribute("msg", "字段不能为空");
-            return "fail";
-        }
-        Pattern pattern = Pattern.compile("[0-9]*");
-        if (phone.length() != 11 || !pattern.matcher(phone).matches()) {
-            model.addAttribute("msg", "电话号码异常");
-            return "fail";
-        }
-        if (code.compareTo(sCode) != 0) {
-            model.addAttribute("msg", "验证码不符");
             return "fail";
         }
         User user = new User();
         user.setUsername(userName);
         user.setPassword(password);
-        user.setPhone(phone);
+        user.setEmail(email);
         user.setUtypeid(2);
+        //*
+        if (code.compareTo(sCode) != 0) {
+            model.addAttribute("msg", "验证码不符");
+            return "fail";
+        }
         if (userService.addUser(user) != 0) return "redirect:/user/login";
         else {
             model.addAttribute("msg", "注册失败");
             return "fail";
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/user/sendEmail",method=RequestMethod.POST)
+    public String sendEmail(String email,HttpSession session) {
+        //System.out.println(user.getEmail());
+        String str = "0123456789";
+        //abcdefghijklmnopqrstuvwxtzQWERTYUIOPASDFGHJKLZXCVBNM0123456789
+
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer(4);
+        for(int i = 0; i < 6; i++) {
+            char b = str.charAt(random.nextInt(str.length()));
+            sb.append(b);
+        }
+        try
+        {
+            HtmlEmail hemail=new HtmlEmail();
+            hemail.setHostName("smtp.163.com");
+            hemail.setCharset("utf-8");
+            hemail.addTo(email);
+            hemail.setFrom("aqiangs@163.com","阿强");
+            hemail.setAuthentication("aqiangs@163.com", "369963sun");
+            hemail.setSubject("登录验证码");
+            hemail.setMsg("大佬，你好！你的邮箱验证码是："+sb.toString());
+            hemail.send();
+            session.setAttribute("code", sb.toString());
+           // System.out.println("******sb:"+sb.toString());
+        }
+        catch(Exception e) {
+            ;
+        }
+        return "ok";
     }
 
     @RequestMapping(value = "/forget", method = RequestMethod.GET)
@@ -295,7 +327,7 @@ public class UserController {
                 return "fail";
             } else {
                 String fileName = "" + currentUser.getUserid() + ".JPG";
-                String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/images/user/";
+                String filePath = "/Users/pu/Desktop/carrent/src/main/webapp/images/user/";//filepath需要修改
                 File dest = new File(filePath + fileName);
                 try {
                     file.transferTo(dest);

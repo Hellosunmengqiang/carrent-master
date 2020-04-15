@@ -74,14 +74,14 @@
                         <input type="text" class="form-control" placeholder="用户名" id="userName" name="userName" required="required" />
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="手机号" id="phone" name="phone" required="required" />
+                        <input type="text" class="form-control" placeholder="邮箱" id="email" name="email" required="required" />
                     </div>
                     <div>
                         <div class="col-xs-6" style="padding-left:0">
                             <input type="text" class="form-control" placeholder="验证码" id="code" name="code" />
                         </div>
                         <div class="col-xs-6">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="getCode(this)">获取验证码</button>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="getEmailCode(this)">获取验证码</button>
                         </div>
                     </div>
                     <div>
@@ -122,6 +122,17 @@
     );
 </script>
 <script>
+
+    function getEmailCode(that) {
+        var emailNum = $('#email').val();
+        alert("code!")
+        $.post("<%=request.getContextPath() %>/user/sendEmail", {
+            email : emailNum
+        }, function(responseData,status){
+        });
+    }
+
+
     var wait = 120;
     function getCode(that) {
         var phoneNum = $('#phone').val();
