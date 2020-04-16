@@ -122,18 +122,23 @@
     );
 </script>
 <script>
-
+    //邮箱的在使用
+    var wait = 120;
     function getEmailCode(that) {
         var emailNum = $('#email').val();
-        alert("code!")
         $.post("<%=request.getContextPath() %>/user/sendEmail", {
             email : emailNum
         }, function(responseData,status){
+            if(status=="success"){
+                if(responseData=="fail") {
+                    alert("邮箱格式错误！");
+                } else {setButtonStatus(that);}
+            }
         });
     }
 
-
-    var wait = 120;
+//手机测试，现在不用
+    //var wait = 120;
     function getCode(that) {
         var phoneNum = $('#phone').val();
         $.post("<%=request.getContextPath() %>/user/phoneCode", {

@@ -42,6 +42,11 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+    @RequestMapping(value = "/index")
+    public String index() {
+        return "index";
+    }
+
     @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public String login() {
         return "login";
@@ -75,16 +80,16 @@ public class UserController {
             model.addAttribute("msg", "字段不能为空");
             return "fail";
         }
+        if (code.compareTo(sCode) != 0) {
+            model.addAttribute("msg", "验证码不符");
+            return "fail";
+        }
         User user = new User();
         user.setUsername(userName);
         user.setPassword(password);
         user.setEmail(email);
         user.setUtypeid(2);
-        //*
-        if (code.compareTo(sCode) != 0) {
-            model.addAttribute("msg", "验证码不符");
-            return "fail";
-        }
+
         if (userService.addUser(user) != 0) return "redirect:/user/login";
         else {
             model.addAttribute("msg", "注册失败");
@@ -99,6 +104,10 @@ public class UserController {
         String str = "0123456789";
         //abcdefghijklmnopqrstuvwxtzQWERTYUIOPASDFGHJKLZXCVBNM0123456789
 
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        if ("".compareTo(email) == 0 || !pattern.matcher(email).matches()) {
+            return "fail";
+        }
         Random random = new Random();
         StringBuffer sb = new StringBuffer(4);
         for(int i = 0; i < 6; i++) {
@@ -131,15 +140,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/forget", method = RequestMethod.POST)
-    public String forget(String phone, String code, String password, String rPassword, HttpSession session, Model model) {
+    public String forget(String email, String code, String password, String rPassword, HttpSession session, Model model) {
         String sCode = (String) session.getAttribute("code");
         if ("".compareTo(password) == 0 || "".compareTo(rPassword) == 0) {
             model.addAttribute("msg", "字段不能为空");
             return "fail";
         }
-        Pattern pattern = Pattern.compile("[0-9]*");
-        if ("".compareTo(phone) == 0 || phone.length() != 11 || !pattern.matcher(phone).matches()) {
-            model.addAttribute("msg", "电话号码异常");
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        if ("".compareTo(email) == 0 || !pattern.matcher(email).matches()) {
+            model.addAttribute("msg", "邮箱号码异常");
             return "fail";
         }
         if (code.compareTo(sCode) != 0) {
@@ -147,7 +156,7 @@ public class UserController {
             return "fail";
         }
         if (password.compareTo(rPassword) == 0) {
-            User user = userService.findUserByPhone(phone);
+            User user = userService.findUserByEmail(email);
             user.setPassword(password);
             userService.changeUser(user);
             model.addAttribute("msg", "修改成功,重新登陆");
@@ -193,9 +202,9 @@ public class UserController {
         return userService.findUserByName(userName).size();
     }
 
-    @RequestMapping(value = "/user/isValidPhone", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public @ResponseBody int isValidPhone(String phone) {
-        if (userService.findUserByPhone(phone) != null)
+    @RequestMapping(value = "/user/isValidEmail", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public @ResponseBody int isValidEmail(String email) {
+        if (userService.findUserByEmail(email) != null)
             return 1;
         else return 0;
     }

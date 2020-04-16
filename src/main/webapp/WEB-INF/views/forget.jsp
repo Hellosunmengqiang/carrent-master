@@ -48,14 +48,14 @@
                 <form action="<%=request.getContextPath() %>/forget" id ="login" method="post">
                     <h1>忘记密码</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="手机号" name="phone" id="phone"/>
+                        <input type="text" class="form-control" placeholder="邮箱" name="email" id="email"/>
                     </div>
                     <div>
                         <div class="col-xs-6" style="padding-left:0">
                             <input type="text" class="form-control" placeholder="验证码" id="code" name="code" />
                         </div>
                         <div class="col-xs-6">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="getCode(this)">获取验证码</button>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="getEmailCode(this)">获取验证码</button>
                         </div>
                     </div>
                     <div>
@@ -75,10 +75,10 @@
 <script src="../../vendors/jquery/dist/jquery.min.js"></script>
 <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
-    $("#phone").blur(
+    $("#email").blur(
         function () {
-            $.post("<%=request.getContextPath() %>/user/isValidPhone",{
-                phone : $(this).val()
+            $.post("<%=request.getContextPath() %>/user/isValidEmail",{
+                email : $(this).val()
             } , function (data) {
                 if (data === 0) {
                     alert("无此用户");
@@ -89,11 +89,11 @@
 </script>
 <script>
     var wait = 120;
-    function getCode(that) {
-        var phoneNum = $('#phone').val();
+    function getEmailCode(that) {
+        var emailNum = $('#email').val();
         setButtonStatus(that);
-        $.post("<%=request.getContextPath() %>/user/phoneCode", {
-            phone : phoneNum
+        $.post("<%=request.getContextPath() %>/user/sendEmail", {
+            email : emailNum
         });
     }
     function setButtonStatus(that) {
