@@ -42,7 +42,7 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/carrent")
     public String index() {
         return "index";
     }

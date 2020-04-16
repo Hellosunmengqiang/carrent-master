@@ -101,8 +101,8 @@ public class OrderController {
                 int f = 0;
                 for (CarDetail carDetail : carDetails) {
                     if (order.getCarDetail().getCdid().equals(carDetail.getCdid())) {
-                        record.setAccidentType(carDetail.getAccidentType());
-                        record.setAccidentTime(carDetail.getAccidentTime());
+                        //record.setAccidentType(carDetail.getAccidentType());
+                        //record.setAccidentTime(carDetail.getAccidentTime());
                         order.setCarDetail(record);
                         f = 1;
                     }
