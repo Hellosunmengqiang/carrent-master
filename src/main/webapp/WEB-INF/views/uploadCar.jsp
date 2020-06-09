@@ -121,7 +121,7 @@
                                 </li>
                                 <li><a><i class="fa fa-dollar"></i> 我的订单 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="<%=request.getContextPath() %>/orders">所有订单</a></li>
+                                        <li><a href="<%=request.getContextPath() %>/showMyUploadCars">所有订单</a></li>
                                         <li><a href="<%=request.getContextPath() %>/showMyRefunds">退款中</a></li>
                                     </ul>
                                 </li>
@@ -133,7 +133,7 @@
                                 <li><a><i class="fa fa-user"></i> 我的 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<%=request.getContextPath() %>/showMyUploadCars">我的出租</a></li>
-                                        <li><a href="<%=request.getContextPath() %>/userDetail">其他信息</a></li>
+                                        <!--<li><a href="<%=request.getContextPath() %>/userDetail">其他信息</a></li>-->
                                     </ul>
                                 </li>
                             </c:if>
@@ -388,6 +388,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!--
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lisence">证件
                                             <span class="required">*</span>
@@ -405,7 +406,7 @@
                                             <input type="file" id="fsFile" name="fsFile" required="required"
                                                    class="form-control col-md-7 col-xs-12">
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

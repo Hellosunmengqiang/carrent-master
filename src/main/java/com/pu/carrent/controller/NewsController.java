@@ -24,7 +24,7 @@ public class NewsController {
     private UserTypeService userTypeService;
 
     @RequestMapping(value = "/News", method = RequestMethod.GET)
-    public String showAllNews(Model model, HttpSession session) {
+        public String showAllNews(Model model, HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
         if ("管理员".compareTo(userTypeService.finduTypeNameById(user.getUtypeid())) == 0) {
             List<News> newsList = newsService.findAllNews();

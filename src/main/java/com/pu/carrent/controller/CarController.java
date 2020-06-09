@@ -224,20 +224,20 @@ public class CarController {
             carDetailService.addCarDetail(carDetail);
             int cdId = carDetailService.findCdId(carDetail);
             carDetail.setCdid(cdId);
-            if (lisence.isEmpty()) {
-                model.addAttribute("msg", "上传失败，请选择文件");
-                return "fail";
-            }
+//            if (lisence.isEmpty()) {
+//                model.addAttribute("msg", "上传失败，请选择文件");
+//                return "fail";
+//            }
             try {
-                String lisenceNmae = "lisence" + cdId + ".docx";
-                String fsFileName = "fsFile" + cdId + ".docx";
-                String filePath = "F:/idea/carrent-master/src/main/webapp/images/car/";//   /Users/pu/Desktop/carrent/src/main/webapp/files/
-                File dest = new File(filePath + lisenceNmae);
-                lisence.transferTo(dest);
-                carDetail.setLisence(1);
-                dest = new File(filePath + fsFileName);
-                fsFile.transferTo(dest);
-                carDetail.setFsfile(1);
+//                String lisenceNmae = "lisence" + cdId + ".docx";
+//                String fsFileName = "fsFile" + cdId + ".docx";
+//                String filePath = "F:/idea/carrent-master/src/main/webapp/images/car/";//   /Users/pu/Desktop/carrent/src/main/webapp/files/
+//                File dest = new File(filePath + lisenceNmae);
+//                lisence.transferTo(dest);
+//                carDetail.setLisence(1);
+//                dest = new File(filePath + fsFileName);
+//                fsFile.transferTo(dest);
+//                carDetail.setFsfile(1);
                 carDetailService.changeCarDetailById(carDetail);
                 return "redirect:/uploadCarDetail";
             } catch (Exception e) {
@@ -245,7 +245,8 @@ public class CarController {
                 model.addAttribute("msg", "上传失败");
                 return "fail";
             }
-        } else {
+     }
+                  else {
             model.addAttribute("msg", "未登录");
             return "fail";
         }

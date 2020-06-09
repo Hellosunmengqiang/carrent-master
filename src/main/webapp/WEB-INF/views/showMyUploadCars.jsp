@@ -80,7 +80,7 @@
                             <li><a><i class="fa fa-user"></i> 我的 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="<%=request.getContextPath() %>/showMyUploadCars">我的出租</a></li>
-                                    <li><a href="<%=request.getContextPath() %>/userDetail">其他信息</a></li>
+                                    <!--<li><a href="<%=request.getContextPath() %>/userDetail">其他信息</a></li>-->
                                 </ul>
                             </li>
                         </ul>

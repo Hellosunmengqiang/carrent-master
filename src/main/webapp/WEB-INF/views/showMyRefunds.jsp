@@ -69,7 +69,7 @@
                             </li>
                             <li><a><i class="fa fa-dollar"></i> 我的订单 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="<%=request.getContextPath() %>/orders">所有订单</a></li>
+                                    <li><a href="<%=request.getContextPath() %>/showMyUploadCars">所有订单</a></li>
                                     <li><a href="<%=request.getContextPath() %>/showMyRefunds">退款中</a></li>
                                 </ul>
                             </li>
